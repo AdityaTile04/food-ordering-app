@@ -1,9 +1,11 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import mongoose from "mongoose";
+import myUserRoute from "./routes/MyUserRoute";
 
 const port = 3000;
+const app = express();
 
 mongoose
   .connect(process.env.MONGO_URI as string)
@@ -14,16 +16,10 @@ mongoose
     console.log(`Some Error in Database : ${err}`);
   });
 
-const app = express();
-
 app.use(express.json());
 app.use(cors());
 
-app.get("/test", async (req: Request, res: Response) => {
-  res.json({
-    message: "Hello World",
-  });
-});
+app.use("/api/my/user", myUserRoute);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
