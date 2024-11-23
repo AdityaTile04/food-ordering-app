@@ -20,6 +20,4 @@ const createCurrentUser = async (req: Request, res: Response) => {
   }
 };
 
-export default {
-  createCurrentUser,
-};
+export default createCurrentUser;
